@@ -21,18 +21,21 @@ const Card = ({ data, loading }) => {               {/* timeoutReached */}
       {data.map((item, index) => {
         const toggleShow = () => setShowMore(prev => !prev);
 
-        const shortDesc = item.description_text?.slice(0, 150) || '';
-        const isLong = item.description_text?.length > 150;
+        const shortDesc = item.description?.slice(0, 150) || '';
+        const isLong = item.description?.length > 150;
+
+        const applyUrl = item.jobProviders?.[0]?.url;
+
 
         return (
           <div key={index} className="bg-gray-50 border-green-200 text-gray-800 p-4 rounded-lg shadow-lg">
             {/* <img src={item.employer_logo} alt="logo" className="w-20 h-20 mx-auto object-contain mb-2" /> */}
             <h6 className="font-bold text-lg text-blue-900">{item.title}</h6>
             <div className="mt-1">
-              <h6 className="font-bold text-xl">{item.organization}</h6>
-              <p className="text-gray-600 font-medium mt-2">{item.locations_derived}</p>
+              <h6 className="font-bold text-xl">{item.company}</h6>
+              <p className="text-gray-600 font-medium mt-2">{item.location}</p>
               <p className="text-sm mt-2">
-                {showMore ? item.description_text : shortDesc}
+                {showMore ? item.description : shortDesc}
                 {isLong && (
                   <span
                     onClick={toggleShow}
@@ -42,7 +45,7 @@ const Card = ({ data, loading }) => {               {/* timeoutReached */}
                   </span>
                 )}
               </p>
-              <button onClick={() => window.open(item.job_apply_link)} className="mt-4 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition cursor-pointer">
+              <button onClick={() => window.open(applyUrl)} className="mt-4 bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition cursor-pointer">
                 Apply Now
               </button>
             </div>

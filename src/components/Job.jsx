@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Card from './Card';
 
 // 🔸 Job Filter Constants
@@ -24,12 +24,12 @@ const COUNTRY_MAP = {
 const EXPERIENCE_LEVELS = ['', 'entry level', 'mid level', 'senior level'];
 
 // 🔸 API Config Constants
-const API_URL = 'https://active-jobs-db.p.rapidapi.com/active-ats-7d';
+const API_URL = 'https://jobs-api14.p.rapidapi.com/v2/list';
 const API_HEADERS = {
   method: 'GET',
   headers: {
     'x-rapidapi-key': 'dfb5fa716emsh92805f77ca6f229p1206c1jsnf48f4248a561',
-    'x-rapidapi-host': 'active-jobs-db.p.rapidapi.com',
+    'x-rapidapi-host': 'jobs-api14.p.rapidapi.com',
   },
 };
 
@@ -45,28 +45,28 @@ const Job = () => {
     setLoading(true);
     setJobData([]);
 
-    const encodedTitle = encodeURIComponent(`"${title}"`);
-    const encodedCountry = encodeURIComponent(`"${COUNTRY_MAP[country]}"`);
-    const encodedCity = city ? encodeURIComponent(`"${city}"`) : '';
-    const locationFilter = city ? `${encodedCity} OR ${encodedCountry}` : `${encodedCountry}`;
+    const location = city
+      ? `${city}, ${COUNTRY_MAP[country]}`
+      : COUNTRY_MAP[country];
 
-    const url = `${API_URL}?limit=10&offset=0&title_filter=${encodedTitle}&location_filter=${locationFilter}&description_type=text`;
+    const query = encodeURIComponent(title);
+    const locationEncoded = encodeURIComponent(location);
+    const url = `${API_URL}?query=${query}&location=${locationEncoded}&autoTranslateLocation=true&remoteOnly=false&employmentTypes=fulltime;parttime;intern;contractor`;
 
     try {
       const response = await fetch(url, API_HEADERS);
-      const result = await response.json();
+      const result = await response.json(); // use .json to parse as object
       console.log(result);
-      setJobData(result || []);
+
+      // Replace 'jobs' if response structure is different
+      setJobData(result?.jobs || []);
     } catch (error) {
       console.error('Error fetching jobs:', error);
+      setJobData([]);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   return (
     <div className=''>
@@ -116,7 +116,7 @@ const Job = () => {
           >
             {EXPERIENCE_LEVELS.map((exp) => (
               <option key={exp} value={exp}>
-                {exp ? exp : 'Experience'}
+                {exp || 'Experience'}
               </option>
             ))}
           </select>
