@@ -14,7 +14,7 @@ const Home = () => {
     <div>
       
       <nav className='flex items-center justify-between bg-blue-950 p-2 lg:p-2 gap-12 font-semibold fixed top-0 z-50 w-full'>
-        <div className='bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white p-2 rounded-lg font-mono'>
+        <div className='bg-gradient-to-r from-green-600 via-purple-5 to-blue-600 text-white p-2 rounded-lg font-mono'>
             <h1>Apply.com</h1>
         </div>
 
@@ -25,7 +25,7 @@ const Home = () => {
 
         <div className='flex gap-1 items-center'>
             {/* <input type="text" placeholder='Search Here...' value={""} className='w-[150px] lg:w-[250px] md:w-[200px] border border-yellow-100 p-1 rounded-lg text-white capitalize' onChange={""} /> */ }
-            <button className='bg-rose-400 p-1.5 md:px-3 rounded-lg text-white cursor-pointer'>Login</button>
+            <button className='bg-purple-600 p-1.5 md:px-3 rounded-lg text-white cursor-pointer'>Login</button>
 
         </div>
       </nav>
