@@ -30,7 +30,7 @@ const Home = () => {
         </div>
       </nav>
 
-        <div className='flex-none lg:flex md:flex mt-16 md:mt-20 lg:mt-20 px-10 py-5 md:px-10 lg:px-34 gap-0 md:gap-20 lg:gap-52 md:pl-8'>
+        <div className='flex-none lg:flex md:flex mt-12 md:mt-20 lg:mt-20 px-10 py-5 md:px-10 lg:px-34 gap-0 md:gap-20 lg:gap-52 md:pl-8'>
           <div>
             <h1 className='text-[42px] md:text-[50px] lg:text-[60px] font-bold animate-pulse bg-gradient-to-r from-sky-600 to-cyan-300 bg-clip-text text-transparent'> NEED A JOB ? </h1> 
             <h1 className='text-3xl md:text-3xl lg:text-4xl font-medium mt-8 animate-bounce text-amber-300'>Get Your <span className='bg-gradient-to-r from-green-400 via-lime-400 to-yellow-300 bg-clip-text text-transparent font-semibold'>DREAM JOB</span> Today !</h1>
